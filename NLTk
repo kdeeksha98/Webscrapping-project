@@ -1,0 +1,27 @@
+
+from nltk.corpus import stopwords
+import nltk
+nltk.download('stopwords')
+english_stops = set(stopwords.words('english'))
+blog="""You’ll be best equipped for this tutorial if you already have a solid foundation in some web application concepts. You should understand how HTTP requests and responses and APIs work. You can check out Python & APIs: A Winning Combo for Reading Public Data to understand the details of using GraphQL APIs vs REST APIs.
+
+Because you’ll use Django to build the back end for your blog, you’ll want to be familiar with starting a Django project and customizing the Django admin. If you haven’t used Django much before, you might also want to try building another Django-only project first. For a good introduction, check out Get Started with Django Part 1: Build a Portfolio App.
+
+Because you’ll be using Vue on the front end, some experience with reactive JavaScript will also help. If you’ve only used a DOM manipulation paradigm with a framework like jQuery in the past, the Vue introduction is a good foundation.
+
+Familiarity with JSON is also important because GraphQL queries are JSON-like and return data in JSON format. You can read about Working with JSON Data in Python for an introduction. You’ll also need to install Node.js to work on the front end later in this tutorial."""
+words = blog.split(' ')
+data=[word for word in words if word not in english_stops]
+# from pymongo import MongoClient
+# client=MongoClient("mongodb://localhost:27017")
+# database=client['NLTK_DATA']
+# collection=database['count_Word']
+dic={}
+for i in data:
+    if i in dic.keys():
+        dic[i]+=1
+    else:
+        dic[i]=1
+for i in dic.keys():
+    # collection.insert_one({i:dic[i]})
+    print(blog)

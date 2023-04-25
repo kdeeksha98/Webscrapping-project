@@ -1,0 +1,30 @@
+import requests 
+from bs4 import BeautifulSoup
+url = 'https://news.ycombinator.com/'
+data = requests.get(url)
+
+soup = BeautifulSoup(data.content,'html.parser')
+tr_athing_list = soup.find_all('tr',{'class': 'athing'})
+
+for tr_athing in tr_athing_list:
+  tr_subtext = tr_athing.find_next_sibling('tr')
+
+  tr_subspace = tr_subtext.find_next_sibling('tr')
+
+  html_snippet = str(tr_athing)+str(tr_subtext)+str(tr_subspace)
+  soup1 = BeautifulSoup(html_snippet,'html.parser')
+
+  title = soup1.select_one('.titleline a')
+  title_text = title.get_text() if title else None
+  hnuser = soup1.select_one('.hnuser')
+  hnuser_text = hnuser.get_text() if hnuser else None
+  sitestr = soup1.select_one('.titleline .sitestr')
+  sitestr_text = sitestr.get_text() if sitestr else None
+  
+  print('Title:',title_text)
+  print('hnuser:',hnuser_text)
+  print('Site:',sitestr_text)
+
+# print('Title:',title)
+# print('HN User:',hnuser)
+# print('Site:',sitestr)
